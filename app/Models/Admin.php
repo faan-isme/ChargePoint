@@ -15,4 +15,8 @@ class Admin extends Model
     protected $casts = [
         'password' => 'hashed'
     ];
+    public function hasil()
+    {
+        return $this->hasMany(Hasil::class);
+    }
 }
