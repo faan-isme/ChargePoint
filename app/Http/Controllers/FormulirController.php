@@ -13,12 +13,13 @@ use Illuminate\Support\Str;
 
 class FormulirController extends Controller
 {
+    // digunakan untuk menampilkan data pendaftaran 
     public function read()
     {
         $data = Formulir::select('tgl_pengiriman', 'id_program', 'id_pelangganPLN', 'NIK', 'id_user', 'ktp_img', 'tipe_charger', 'charger_img')->get();
         return view('admin.table', compact($data));
     }
-
+    // digunakan untuk menyimpan mengambil dan menyimpan data dari formulir pendaftaran
     public function insert(Request $request)
     {
         $request->validate(
