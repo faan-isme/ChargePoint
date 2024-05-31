@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('tipe_charger ',100);
             $table->string('charger_img',255);
             $table->timestamps();
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_program')->references('id')->on('program_mitra')->onDelete('cascade');
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('formulirs');
+        Schema::dropIfExists('formulir');
     }
 };
