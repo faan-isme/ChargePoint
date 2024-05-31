@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -14,25 +15,35 @@ class SessionController extends Controller
     function login(Request $request) {
         Session::flash('email', $request->input('email'));
         $request->validate(
-            ['email'=>'required',
+        [
+            'email'=>'required|email',
             'password'=>'required'
         ],
         [
             'email.required'=>'email wajib diisi',
+            'email.email'=>'Format email salah atau tidak valid',
             'password.required'=>'password wajib diisi'
         ]
         );
-        $infoLogin = [
-            'email' => $request ->email,
-            'password' => $request ->password,
-        ];
 
-        if (Auth::attempt($infoLogin)) {
-            // cek role
-            return redirect()->route('home');
-        }else{
-            return back()->withErrors('email dan password yang dimasukkan tidak sesuai');
+        // Cek login sebagai Admin
+        $admin = Admin::where('email', $request->email)->first();
+        if ($admin && Hash::check($request->password, $admin->password) && $admin->role =='admin') {
+            Auth::login($admin);
+            return redirect()->route('admin.dashboard');
         }
+
+        // Cek login sebagai User
+        $user = User::where('email', $request->email)->first();
+        if ($user && Hash::check($request->password, $user->password) && $user->role =='user') {
+            Auth::login($user);
+            return redirect()->route('home');
+        }
+        
+         // Jika gagal login
+         return back()->withErrors([
+            'email' => 'User tidak dapat ditemukan',
+        ]);
     }
 
     function register(Request $request) {
