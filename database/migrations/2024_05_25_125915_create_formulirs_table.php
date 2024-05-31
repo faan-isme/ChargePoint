@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('formulir', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('tgl_pengiriman');
             $table->integer('id_program');
             $table->string('id_pelangganPLN',30);
             $table->string('NIK',25);
@@ -21,7 +20,7 @@ return new class extends Migration
             $table->string('ktp_img',255);
             $table->string('tipe_charger ',100);
             $table->string('charger_img',255);
-            $table->timestamps();
+            $table->timestamp('tgl_pengiriman')->nullable();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_program')->references('id')->on('program_mitra')->onDelete('cascade');
         });
