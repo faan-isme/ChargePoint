@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('hasil', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_admin');
-            $table->integer('id_formulir');
-            $table->timestamps();
+            $table->unsignedBigInteger('id_admin');
+            $table->unsignedBigInteger('id_formulir');
             $table->foreign('id_admin')->references('id')->on('admin')->onDelete('cascade');
             $table->foreign('id_formulir')->references('id')->on('formulir')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
