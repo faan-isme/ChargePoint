@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// landing page
-Route::get('/', function () {
-    return view('welcome');
-});
+// SIgn-In dan Sign-Up
+Route::view('/signin', 'pages.SignIn')->name('SignIn');
+Route::view('/signup', 'pages.SignUp')->name('SignUp');
 
 //login
 Route::get('/login', function () {
