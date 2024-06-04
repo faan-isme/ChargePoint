@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\User;
+use Exception;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class SessionController extends Controller
@@ -27,7 +31,23 @@ class SessionController extends Controller
         );
 
         // Cek login sebagai Admin
-        $admin = Admin::where('email', $request->email)->first();
+        
+        try {
+            $admin = Admin::where('email', $request->email)->first();
+        }catch (QueryException $e) {
+            // Menangani kesalahan query database
+            Log::error('Query Exception: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan pada database. Silakan coba lagi.']);
+        } catch (ModelNotFoundException $e) {
+            // Menangani kesalahan model tidak ditemukan
+            Log::error('Model Not Found Exception: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'Data yang dicari tidak ditemukan.']);
+        } catch (Exception $e) {
+            // Menangani kesalahan umum lainnya
+            Log::error('General Exception: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan. Silakan coba lagi.']);
+        }
+
         if ($admin && Hash::check($request->password, $admin->password) && $admin->role =='admin') {
             Auth::login($admin);
             return redirect()->route('admin.dashboard');
@@ -42,7 +62,7 @@ class SessionController extends Controller
         
          // Jika gagal login
          return back()->withErrors([
-            'email' => 'User tidak dapat ditemukan',
+            'error' => 'User tidak dapat ditemukan',
         ]);
     }
 
@@ -53,19 +73,19 @@ class SessionController extends Controller
             [
                 'username'=>'required',
                 'email'=>'required|email|unique:users',
-                'no_telp'=>'required|numeric|max:15',
-                'alamat'=>'required|max:255',
+                // 'no_telp'=>'required|numeric|max:15',
+                // 'alamat'=>'required|max:255',
                 'password'=>'required|min:8|confirmed'
             ],[
                 'username.required'=>'Nama wajib diisi',
                 'email.required'=>'Email wajib diisi',
                 'email.email'=>'Format email salah atau tidak valid',
                 'email.unique'=>'Email sudah digunakan, silahkan masukkan email yang lain',
-                'no_telp.required'=>'Nomor telepon wajib diisi',
-                'no_telp.numeric'=>'Nomer telepon harus berupa angka',
-                'no_telp.max'=>'Nomer telepon maximum 15 angka',
-                'alamat.required'=>'Alamat wajib diisi',
-                'alamat.max'=>'Alamat maximal 255 karakter',
+                // 'no_telp.required'=>'Nomor telepon wajib diisi',
+                // 'no_telp.numeric'=>'Nomer telepon harus berupa angka',
+                // 'no_telp.max'=>'Nomer telepon maximum 15 angka',
+                // 'alamat.required'=>'Alamat wajib diisi',
+                // 'alamat.max'=>'Alamat maximal 255 karakter',
                 'password.required'=>'Password wajib diisi',
                 'password.min'=>'Minimum password 8 karakter',
                 'password.confirmed'=>'Password Konfirmasi Tidak cocok'
@@ -77,10 +97,10 @@ class SessionController extends Controller
         $data = [
                 'username'=>$request->username,
                 'email'=>$request->email,
-                'alamat'=>$request->alamat,
+                'alamat'=>'unset',
                 'status'=>0,
                 'role'=>'user',
-                'no_telp'=>$request->no_telp,
+                'no_telp'=>'unset',
                 'password'=>Hash::make($request->password)
         ];
         $user = User::create($data);
