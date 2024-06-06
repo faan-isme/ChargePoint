@@ -36,3 +36,8 @@ Route::view('/home','home')->name('home')->middleware(['auth','verified']);
 
 // Home Tamu
 Route::view('/home-chargepoint', 'pages.Home.Home')->name('Home');
+
+// FOrm Pendaftaran Tamu
+Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran');
+
+
