@@ -30,7 +30,7 @@
                 </li>
                 <div>
                     <button
-                        class="bg-[#E8EEFF] px-3 py-2 rounded-md md:text-black text-white hover:bg-black  md:hover:bg-white">Login</button>
+                        class="bg-[#000D81] md:bg-[#E8EEFF] px-3 py-2 rounded-md md:text-black text-white hover:bg-black  md:hover:bg-white">Login</button>
                 </div>
             </ul>
         </div>
