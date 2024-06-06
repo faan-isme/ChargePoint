@@ -117,7 +117,7 @@
 </section>
 
 @section('script')
-    <script src="./js/tamu/home.js"></script>
+
 @endsection
 
 
