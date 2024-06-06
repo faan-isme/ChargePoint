@@ -33,3 +33,6 @@ Route::post('/email/verification-notification',[VerificationController::class, '
 
 // home
 Route::view('/home','home')->name('home')->middleware(['auth','verified']);
+
+// Home Tamu
+Route::view('/home-chargepoint', 'pages.Home.Home')->name('Home');
