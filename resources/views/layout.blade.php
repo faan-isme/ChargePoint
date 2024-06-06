@@ -18,7 +18,9 @@
     {{-- @if (Route::currentRouteName() != 'password.request' && Route::currentRouteName() != 'admin-dashboard' && Route::currentRouteName() != 'password.reset' && Route::currentRouteName() != 'login.admin' && Route::currentRouteName() != 'register.admin')
 
     @endif --}}
-    @include('pages.partials.navbar')
+    @if (Route::currentRouteName() != 'formPendaftaran')
+        @include('pages.partials.navbar')
+    @endif
     <div class="">
         @yield('content')
     </div>

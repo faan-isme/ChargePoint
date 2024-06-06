@@ -1,4 +1,4 @@
-<nav class="bg-[#000D81] shadow-md shadow-black fixed w-full z-50">
+<nav class="bg-[#000D81] shadow-md shadow-black fixed w-full z-50 ">
     <div class="max-w-screen-lg flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">ChargePoint</span>
