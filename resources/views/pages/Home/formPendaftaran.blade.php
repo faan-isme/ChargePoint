@@ -114,8 +114,11 @@
         </div>
         <p class="text-red-500 mt-6">* hanya di isi ketika memilih kemitraan basic</p>
     </form>
-
-
 </section>
+
+@section('script')
+    <script src="./js/tamu/home.js"></script>
+@endsection
+
 
 @endsection
