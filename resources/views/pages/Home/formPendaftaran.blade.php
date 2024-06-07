@@ -124,7 +124,7 @@
             <button class="bg-[#000D81] px-5 py-3 text-white rounded-md hover:bg-black">Submit</button>
             <button class="bg-[#E8EEFF] px-5 py-3 text-black rounded-md hover:bg-black hover:text-white">Batal</button>
         </div>
-        <p class="text-red-500 mt-6" id="text-form">* hanya di isi ketika memilih kemitraan basic</p>
+        <p class="text-red-500 mt-6" id="text-daftar">* hanya di isi ketika memilih kemitraan basic</p>
     </form>
 </section>
 
