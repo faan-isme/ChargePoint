@@ -11,7 +11,7 @@
     <div class="bg-[#000D81] ">
         <div class="max-w-screen-lg mx-auto p-4">
             <div class="flex items-center gap-4">
-                <a href="/home-chargepoint">
+                <a href="/">
                     <svg xmlns="http://www.w3.org/2000/svg" id="back" x="0" y="0" version="1.1" viewBox="0 0 29 29"
                         xml:space="preserve" width="29" height="29">
                         <path
@@ -42,7 +42,7 @@
                     <label for="telephone"
                         class="block mb-2 text-sm font-bold font-poppins text-gray-900 dark:text-white">No
                         Telephone</label>
-                    <input type="text" id="telephone"
+                    <input type="number" id="telephone"
                         class="border-0 border-b-2 text-gray-900 text-sm w-full p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required />
                 </div>
@@ -67,16 +67,15 @@
                     </label>
                     <select id="jeniskemitraan"
                         class="border-0 border-b-2 text-gray-900 text-sm w-full p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option>Basic</option>
-                        <option>Standar</option>
-                        <option>Premium</option>
+                        <option value="Basic">Basic</option>
+                        <option value="Standar">Standar</option>
+                        <option value="Premium">Premium</option>
                     </select>
                 </div>
-                <div class="mb-5" id="pln">
+                <div class="mb-5" id="pln-input">
                     <label for="pln"
-                        class="block mb-2 text-sm font-bold font-poppins text-gray-900 dark:text-white">ID PLN <span
-                            class="text-red-500">*</span></label>
-                    <input type="text" id="idpln"
+                        class="block mb-2 text-sm font-bold font-poppins text-gray-900 dark:text-white">ID PLN </label>
+                    <input type="number" maxlength="11" id="pln"
                         class="border-0 border-b-2 text-gray-900 text-sm w-full p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required />
                 </div>
@@ -85,7 +84,7 @@
                 <div class="mb-5">
                     <label for="nik"
                         class="block mb-2 text-sm text-gray-900 dark:text-white font-bold font-poppins">NIK</label>
-                    <input type="text" id="nik"
+                    <input type="number" maxlength="16" id="nik"
                         class="border-0 border-b-2 text-gray-900 text-sm w-full p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required />
                 </div>
@@ -103,15 +102,15 @@
                         class="border-0 border-b-2 text-gray-900 text-sm w-full p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required></textarea>
                 </div>
-                <div class="mb-5" id="tipecharger">
+                <div class="mb-5" id="tipecharger-input">
                     <label for="tipecharger"
                         class="block mb-2 text-sm text-gray-900 dark:text-white font-bold font-poppins">Tipe Charger
-                        <span class="text-red-500">*</span></label>
+                    </label>
                     <input type="text" id="tipecharger"
                         class="border-0 border-b-2 text-gray-900 text-sm w-full p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required />
                 </div>
-                <div class="mb-5">
+                <div class="mb-5" id="imagecharger-input">
                     <label class="block mb-2 text-sm font-bold font-poppins text-gray-900 dark:text-white"
                         for="file_input">Image Charger</label>
                     <input
@@ -121,10 +120,10 @@
             </div>
         </div>
         <div class="mt-8 flex gap-5">
-            <button class="bg-[#000D81] px-5 py-3 text-white rounded-md hover:bg-black">Submit</button>
-            <button class="bg-[#E8EEFF] px-5 py-3 text-black rounded-md hover:bg-black hover:text-white">Batal</button>
+            <button class="bg-[#000D81] px-5 py-3 text-white rounded-md hover:bg-black" type="submit">Submit</button>
+            <button class="bg-[#E8EEFF] px-5 py-3 text-black rounded-md hover:bg-black hover:text-white" type="reset">Reset</button>
         </div>
-        <p class="text-red-500 mt-6" id="text-daftar">* hanya di isi ketika memilih kemitraan basic</p>
+
     </form>
 </section>
 

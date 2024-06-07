@@ -9,7 +9,7 @@
 @section('content')
 <div class="md:ms-20 md:me-20 lg:ms-20 ms-10 me-10 lg:me-0 h-screen">
     @if ($errors->any())
-        <div class="fixed z-10">
+        <div class="fixed z-50">
             @foreach ($errors->all() as $index => $error)
                 <div id="alert-{{ $index + 1 }}"
                     class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 z-50"

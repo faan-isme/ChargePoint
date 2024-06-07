@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// Home 
+Route::view('/', 'pages.Home.Home')->name('home');
 
 //login
 Route::view('/login', 'pages.Login');
@@ -31,13 +32,11 @@ Route::get('/email/verify', [VerificationController::class,'notice'])->name('ver
 Route::get('/email/verify/{id}/{hash}',[VerificationController::class, 'verify'])->name('verification.verify')->middleware(['auth', 'signed']);
 Route::post('/email/verification-notification',[VerificationController::class, 'resendVerif'])->middleware(['auth', 'throttle:1,1'])->name('verification.send');
 
-// home
-Route::view('/home','home')->name('home')->middleware(['auth','verified']);
 
-// Home Tamu
-Route::view('/home-chargepoint', 'pages.Home.Home')->name('Home');
 
-// FOrm Pendaftaran Tamu
-Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran');
+
+
+// Form Pendaftaran mitra
+Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran')->middleware(['auth', 'verified']);;
 
 
