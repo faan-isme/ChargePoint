@@ -64,7 +64,8 @@
                     <p class="font-poppins">Mitra Lahan</p>
                 </div>
                 <div class="mt-10 mb-0">
-                    <button class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
+                    <button id="subscribe-basic" onclick="window.location.href='{{ route('formPendaftaran') }}'"
+                        class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
                 </div>
             </div>
             <div
@@ -77,7 +78,8 @@
                     <p class="font-poppins">Charge Set</p>
                 </div>
                 <div class="mt-10 mb-0">
-                    <button class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
+                    <button id="subscribe-standar" onclick="window.location.href='{{ route('formPendaftaran') }}'"
+                        class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
                 </div>
             </div>
             <div
@@ -91,7 +93,8 @@
                     <p class="font-poppins">Member Premium</p>
                 </div>
                 <div class="mt-10 mb-0">
-                    <button class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
+                    <button id="subscribe-premium" onclick="window.location.href='{{ route('formPendaftaran') }}'"
+                        class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
                 </div>
             </div>
         </div>
