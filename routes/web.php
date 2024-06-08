@@ -42,4 +42,5 @@ Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran');
 
 // Dashboard
 Route::view('/admin/datapendaftaran', 'pages.Dashboard.DataPendaftaran')->name('DataPendaftaran');
+Route::view('/admin/checkpendaftaran', 'pages.Dashboard.CheckPendaftaran')->name('CheckPendaftaran');
 

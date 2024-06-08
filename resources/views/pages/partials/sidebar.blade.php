@@ -13,18 +13,19 @@
     class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full  lg:translate-x-0"
     aria-label="Sidebar">
     <div class="h-full  px-3 py-4 overflow-y-auto bg-[#000D81] dark:bg-gray-800">
+        <h1 class="font-baloo text-3xl mt-5 mb-10 ms-4 text-white">Chargepoint</h1>
         <ul class="space-y-2 font-medium">
             <li>
                 <a href="#"
                     class="flex items-center p-2 text-white rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <span class="ms-3">Dashboard</span>
+                    <span class="ms-3">Data Pendaftaran</span>
                 </a>
             </li>
             <li>
                 <a href="#"
                     class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                    <span class="flex-1 ms-3 whitespace-nowrap">Kanban</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">ACC Pendaftaran</span>
 
                 </a>
             </li>
@@ -32,7 +33,7 @@
                 <a href="#"
                     class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                    <span class="flex-1 ms-3 whitespace-nowrap">Inbox</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Proses Pendaftaran</span>
 
                 </a>
             </li>
