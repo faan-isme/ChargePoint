@@ -9,21 +9,19 @@
 @section('content')
 
 <div class="px-6 pt-3 md:px-10 md:pt-10 lg:ml-64">
+    <h1 class="mb-6 md:text-3xl text-2xl font-poppins font-bold">Data Pendaftaran</h1>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead class="text-[14px] font-bold font-poppins text-black uppercase bg-[#E8EEFF]">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Product name
+                        No
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Color
+                        Nama
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Category
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Price
+                        Email
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -31,99 +29,73 @@
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Apple MacBook Pro 17"
+                <tr class=" bg-[#F8F8F8] text-black font-poppins">
+                    <td class="px-6 py-4">
+                        1
+                    </td>
+                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+                        Anonymus
                     </th>
                     <td class="px-6 py-4">
-                        Silver
+                        anonymus@gmail.com
                     </td>
                     <td class="px-6 py-4">
-                        Laptop
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        <a href="#"
+                            class="font-medium px-6 py-2 rounded-md bg-[#000D81] hover:bg-black text-white">Edit</a>
                     </td>
                 </tr>
-                <tr
-                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Microsoft Surface Pro
+                <tr class=" bg-[#F8F8F8] text-black font-poppins">
+                    <td class="px-6 py-4">
+                        2
+                    </td>
+                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+                        Anonymus
                     </th>
                     <td class="px-6 py-4">
-                        White
+                        anonymus@gmail.com
                     </td>
                     <td class="px-6 py-4">
-                        Laptop PC
-                    </td>
-                    <td class="px-6 py-4">
-                        $1999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        <a href="#"
+                            class="font-medium px-6 py-2 rounded-md bg-[#000D81] hover:bg-black text-white">Edit</a>
                     </td>
                 </tr>
-                <tr
-                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Magic Mouse 2
+                <tr class=" bg-[#F8F8F8] text-black font-poppins">
+                    <td class="px-6 py-4">
+                        3
+                    </td>
+                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+                        Anonymus
                     </th>
                     <td class="px-6 py-4">
-                        Black
+                        anonymus@gmail.com
                     </td>
                     <td class="px-6 py-4">
-                        Accessories
-                    </td>
-                    <td class="px-6 py-4">
-                        $99
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        <a href="#"
+                            class="font-medium px-6 py-2 rounded-md bg-[#000D81] hover:bg-black text-white">Edit</a>
                     </td>
                 </tr>
-                <tr
-                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Google Pixel Phone
+                <tr class=" bg-[#F8F8F8] text-black font-poppins">
+                    <td class="px-6 py-4">
+                        4
+                    </td>
+                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+                        Anonymus
                     </th>
                     <td class="px-6 py-4">
-                        Gray
+                        anonymus@gmail.com
                     </td>
                     <td class="px-6 py-4">
-                        Phone
-                    </td>
-                    <td class="px-6 py-4">
-                        $799
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Apple Watch 5
-                    </th>
-                    <td class="px-6 py-4">
-                        Red
-                    </td>
-                    <td class="px-6 py-4">
-                        Wearables
-                    </td>
-                    <td class="px-6 py-4">
-                        $999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        <a href="#"
+                            class="font-medium px-6 py-2 rounded-md bg-[#000D81] hover:bg-black text-white">Edit</a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-
+    <div class="flex justify-end mt-10 md:gap-5 gap-3">
+        <button class="font-medium px-6 py-2 rounded-md bg-[#000D81] hover:bg-black text-white">Back</button>
+        <button class="font-medium px-6 py-2 rounded-md bg-[#000D81] hover:bg-black text-white">Next</button>
+    </div>
 </div>
 
 @section('script')
