@@ -40,4 +40,6 @@ Route::view('/home-chargepoint', 'pages.Home.Home')->name('Home');
 // FOrm Pendaftaran Tamu
 Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran');
 
+// Dashboard
+Route::view('/admin/datapendaftaran', 'pages.Dashboard.DataPendaftaran')->name('DataPendaftaran');
 
