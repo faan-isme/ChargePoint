@@ -17,7 +17,7 @@
             <p class="font-poppins text-[18px] font-normal mt-4">Pergi Kemanapun Tanpa Khawatir, Solusi Pintar
                 Charger Kendaraan Listrik </p>
             <div class="mt-10">
-                <button class="px-5 py-3 bg-[#E8EEFF] text-black rounded-md mt hover:bg-black hover:text-white">Daftar
+                <button class="px-5 py-3 bg-[#E8EEFF] text-black rounded-md hover:bg-black hover:text-white">Daftar
                     Sekarang</button>
             </div>
         </div>
@@ -64,7 +64,8 @@
                     <p class="font-poppins">Mitra Lahan</p>
                 </div>
                 <div class="mt-10 mb-0">
-                    <button class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
+                    <button id="subscribe-basic" onclick="window.location.href='{{ route('formPendaftaran') }}'"
+                        class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
                 </div>
             </div>
             <div
@@ -77,7 +78,8 @@
                     <p class="font-poppins">Charge Set</p>
                 </div>
                 <div class="mt-10 mb-0">
-                    <button class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
+                    <button id="subscribe-standar" onclick="window.location.href='{{ route('formPendaftaran') }}'"
+                        class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
                 </div>
             </div>
             <div
@@ -91,7 +93,8 @@
                     <p class="font-poppins">Member Premium</p>
                 </div>
                 <div class="mt-10 mb-0">
-                    <button class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
+                    <button id="subscribe-premium" onclick="window.location.href='{{ route('formPendaftaran') }}'"
+                        class="bg-[#000D81] px-5 py-2 rounded-md text-white hover:bg-black">Subscribe Me</button>
                 </div>
             </div>
         </div>
@@ -101,7 +104,7 @@
 {{-- Section 4 --}}
 <section class="bg-[#E8EEFF]">
     <div class="max-w-screen-lg mx-auto p-4">
-        <div class="text-center lg:mt-28 md:mt-16 mt-20">
+        <div class="text-center lg:mt-28 md:mt-20 mt-16">
             <h1 class="font-poppins font-bold lg:text-4xl md:text-3xl text-2xl">Q & A</h1>
             <p class="font-medium font-poppins mt-2">Pertanyaan Seputar Charge Point dan lain-lain </p>
         </div>
