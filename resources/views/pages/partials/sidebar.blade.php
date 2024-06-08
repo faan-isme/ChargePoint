@@ -16,13 +16,13 @@
         <h1 class="font-baloo text-3xl mt-5 mb-10 ms-4 text-white">Chargepoint</h1>
         <ul class="space-y-2 font-medium">
             <li>
-                <a href="#"
+                <a href="/admin/datapendaftaran"
                     class="flex items-center p-2 text-white rounded-lg dark:text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <span class="ms-3">Data Pendaftaran</span>
                 </a>
             </li>
             <li>
-                <a href="#"
+                <a href="/admin/accpendaftaran"
                     class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                     <span class="flex-1 ms-3 whitespace-nowrap">ACC Pendaftaran</span>
@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"
+                <a href="/admin/prosespendaftaran"
                     class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                     <span class="flex-1 ms-3 whitespace-nowrap">Proses Pendaftaran</span>
@@ -39,7 +39,7 @@
             </li>
 
             <li>
-                <a href="#"
+                <a href=""
                     class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                     <span class="flex-1 ms-3 whitespace-nowrap">LogOut</span>

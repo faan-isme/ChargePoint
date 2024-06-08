@@ -94,7 +94,18 @@
                         for="file_input">Image KTP</label>
                     <input
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        id="file_input" type="file">
+                        id="img-Ktp" type="file" accept="image/*">
+                    <div class="mb-4 mt-4">
+                        <img id="preview" alt="Preview Gambar" class="w-[50%] h-[50%] hidden cursor-pointer">
+                    </div>
+                    <div class="fixed p-5 md:p-o inset-0 hidden items-center justify-center bg-black bg-opacity-50"
+                        id="imageModal">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm mx-auto my-auto">
+                            <div class="p-2">
+                                <img id="modalcheck" src="#" class="img-fluid w-full" alt="Modal Image">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="mb-5">
                     <label for="alamat"
@@ -116,7 +127,18 @@
                         for="file_input">Image Charger</label>
                     <input
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        id="file_input" type="file">
+                        id="img-charger" type="file" accept="image/*">
+                    <div class="mb-4 mt-4">
+                        <img id="preview-charger" alt="Preview Gambar" class="w-[50%] h-[50%] hidden cursor-pointer">
+                    </div>
+                    <div class="fixed p-5 md:p-o inset-0 hidden items-center justify-center bg-black bg-opacity-50"
+                        id="modal-charger">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm mx-auto my-auto">
+                            <div class="p-2">
+                                <img id="check-charger" src="#" class="img-fluid w-full" alt="Modal Image">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

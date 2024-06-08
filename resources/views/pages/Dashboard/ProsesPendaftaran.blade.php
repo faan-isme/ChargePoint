@@ -9,7 +9,7 @@
 @section('content')
 
 <div class="px-6 pt-3 md:px-10 md:pt-10 lg:ml-64">
-    <h1 class="mb-6 md:text-3xl text-2xl font-poppins font-bold">Data Pendaftaran</h1>
+    <h1 class="mb-6 md:text-3xl text-2xl font-poppins font-bold">Proses Pendaftaran</h1>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-[14px] font-bold font-poppins text-black uppercase bg-[#E8EEFF]">
