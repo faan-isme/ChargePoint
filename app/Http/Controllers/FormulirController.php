@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Formulir;
+use App\Models\ProgramMitra;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -19,47 +20,93 @@ class FormulirController extends Controller
         $data = Formulir::select('tgl_pengiriman', 'id_program', 'id_pelangganPLN', 'NIK', 'id_user', 'ktp_img', 'tipe_charger', 'charger_img')->get();
         return view('admin.table', compact($data));
     }
-    // digunakan untuk menyimpan mengambil dan menyimpan data dari formulir pendaftaran
+    // digunakan untuk  mengambil dan menyimpan data dari formulir pendaftaran
     public function insert(Request $request)
     {
-        $request->validate(
-            [
-                'id_pelangganPLN' => 'required|numeric|max:11',
-                'NIK' => 'required|numeric|max:16',
-                'ktp_img' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-                'tipe_charger' => 'required',
-                'charger_img' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-
-            ],
-            [
-                'id_pelangganPLN.required' => 'ID pelanggan PLN wajib diisi',
-                'id_pelangganPLN.numeric' => 'ID pelanggan PLN hanya angka',
-                'id_pelangganPLN.max' => 'ID pelanggan PLN max 11 digit ',
-                'NIK.required' => 'NIK wajib diisi',
-                'NIK.numeric' => 'NIK hanya angka',
-                'NIK.max' => 'NIK max 16 digit ',
-                'ktp_img.required' => 'Gambar KTP wajib diunggah',
-                'ktp_img.image' => 'File KTP harus berupa gambar',
-                'ktp_img.mimes' => 'Gambar KTP harus memiliki format: jpeg, png, jpg',
-                'ktp_img.max' => 'Ukuran gambar KTP maksimal adalah 2MB',
-                'tipe_charger.required' => 'Tipe charger wajib diisi',
-                'charger_img.required' => 'Gambar charger wajib diunggah',
-                'charger_img.image' => 'File charger harus berupa gambar',
-                'charger_img.mimes' => 'Gambar charger harus memiliki format: jpeg, png, jpg',
-                'charger_img.max' => 'Ukuran gambar charger maksimal adalah 2MB',
-
-            ]
-        );
+        $jenisMitra = $request->jenis_mitra;
+        if ($jenisMitra === 'Basic') {
+            $request->validate(
+                [
+                    'nama' => 'required',
+                    'alamat' => 'required',
+                    'no_tlp' => 'required|numeric|max_digits:14',
+                    'jenis_mitra' => 'required',
+                    'id_pelangganPLN' => 'required|numeric|max_digits:11',
+                    'NIK' => 'required|numeric|max_digits:16',
+                    'ktp_img' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                    'tipe_charger' => 'required',
+                    'charger_img' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+    
+                ],
+                [
+                    'nama.required' => 'Nama wajib diisi',
+                    'alamat.required' => 'Alamat wajib diisi',
+                    'no_tlp.required' => 'Nomor telepon wajib diisi',
+                    'no_tlp.numeric' => 'Nomor telepon hanya angka',
+                    'no_tlp.max_digits' => 'Nomor telepon max 14 digit ',
+                    'id_pelangganPLN.required' => 'ID pelanggan PLN wajib diisi',
+                    'id_pelangganPLN.numeric' => 'ID pelanggan PLN hanya angka',
+                    'id_pelangganPLN.max_digits' => 'ID pelanggan PLN max 11 digit ',
+                    'NIK.required' => 'NIK wajib diisi',
+                    'NIK.numeric' => 'NIK hanya angka',
+                    'NIK.max_digits' => 'NIK max 16 digit ',
+                    'ktp_img.required' => 'Gambar KTP wajib diunggah',
+                    'ktp_img.image' => 'File KTP harus berupa gambar',
+                    'ktp_img.mimes' => 'Gambar KTP harus memiliki format: jpeg, png, jpg',
+                    'ktp_img.max' => 'Ukuran gambar KTP maksimal adalah 2MB',
+                    'tipe_charger.required' => 'Tipe charger wajib diisi',
+                    'charger_img.required' => 'Gambar charger wajib diunggah',
+                    'charger_img.image' => 'File charger harus berupa gambar',
+                    'charger_img.mimes' => 'Gambar charger harus memiliki format: jpeg, png, jpg',
+                    'charger_img.max' => 'Ukuran gambar charger maksimal adalah 2MB',
+    
+                ]
+            );
+        } else {
+            $request->validate(
+                [
+                    'nama' => 'required',
+                    'alamat' => 'required',
+                    'no_tlp' => 'required|numeric|max_digits:14',
+                    'jenis_mitra' => 'required',
+                    'NIK' => 'required|numeric|max_digits:16',
+                    'ktp_img' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                    
+    
+                ],
+                [
+                    'nama.required' => 'Nama wajib diisi',
+                    'alamat.required' => 'Alamat wajib diisi',
+                    'no_tlp.required' => 'Nomor telepon wajib diisi',
+                    'no_tlp.numeric' => 'Nomor telepon hanya angka',
+                    'no_tlp.max_digits' => 'Nomor telepon max 14 digit ',
+                    'NIK.required' => 'NIK wajib diisi',
+                    'NIK.numeric' => 'NIK hanya angka',
+                    'NIK.max_digits' => 'NIK max 16 digit ',
+                    'ktp_img.required' => 'Gambar KTP wajib diunggah',
+                    'ktp_img.image' => 'File KTP harus berupa gambar',
+                    'ktp_img.mimes' => 'Gambar KTP harus memiliki format: jpeg, png, jpg',
+                    'ktp_img.max' => 'Ukuran gambar KTP maksimal adalah 2MB',
+                   
+                ]
+            );
+        }
+        
 
         
         try {
+            $program = ProgramMitra::where('nama_program', $jenisMitra)->first();
+            
             $data = [
                 'id_user' => Auth::id(),
-                'id_program' => $request->id_program,
-                'id_pelangganPLN' => $request->id_pelangganPLN,
+                'id_program' => $program->id,
                 'NIK' => $request->NIK,
-                'tipe_charger' => $request->tipe_charger,
             ];
+            if ($jenisMitra === 'Basic') {
+                $data['id_pelangganPLN'] = $request->id_pelangganPLN;
+                $data['tipe_charger'] = $request->tipe_charger;
+            }
+
             // Menyimpan gambar ke storage
             if ($request->hasFile('ktp_img')) {
                 $ktp_img = $request->file('ktp_img');
@@ -75,7 +122,6 @@ class FormulirController extends Controller
 
             // Simpan data ke database
             Formulir::create($data);
-
             return redirect()->route('formulir.index')->with('success', 'Formulir berhasil disimpan.');
         } catch (QueryException $e) {
             // Menangani kesalahan query database
@@ -96,8 +142,8 @@ class FormulirController extends Controller
     {
         $request->validate(
             [
-                'id_pelangganPLN' => 'required|numeric|max:11',
-                'NIK' => 'required|numeric|max:16',
+                'id_pelangganPLN' => 'required|numeric|max_digits:11',
+                'NIK' => 'required|numeric|max_digits:16',
                 'ktp_img' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
                 'tipe_charger' => 'required',
                 'charger_img' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
@@ -106,10 +152,10 @@ class FormulirController extends Controller
             [
                 'id_pelangganPLN.required' => 'ID pelanggan PLN wajib diisi',
                 'id_pelangganPLN.numeric' => 'ID pelanggan PLN hanya angka',
-                'id_pelangganPLN.max' => 'ID pelanggan PLN max 11 digit ',
+                'id_pelangganPLN.max_digits' => 'ID pelanggan PLN max 11 digit ',
                 'NIK.required' => 'NIK wajib diisi',
                 'NIK.numeric' => 'NIK hanya angka',
-                'NIK.max' => 'NIK max 16 digit ',
+                'NIK.max_digits' => 'NIK max 16 digit ',
                 'ktp_img.sometimes' => 'Gambar KTP tidak harus diunggah ulang',
                 'ktp_img.image' => 'File KTP harus berupa gambar',
                 'ktp_img.mimes' => 'Gambar KTP harus memiliki format: jpeg, png, jpg',

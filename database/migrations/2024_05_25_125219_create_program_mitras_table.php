@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_program',100);
             $table->integer('harga');
+            $table->string('deskripsi',255);
             $table->timestamps();
         });
     }
