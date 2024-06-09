@@ -9,7 +9,6 @@
     {{-- <link rel="shortcut icon" style="" href="/assets/img/logo-copy.png" type="image/x-icon" /> --}}
     <link href="https://fonts.googleapis.com/css2?family=Baloo&display=swap" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     @yield('styles')
 
@@ -19,10 +18,8 @@
     {{-- @if (Route::currentRouteName() != 'password.request' && Route::currentRouteName() != 'admin-dashboard' && Route::currentRouteName() != 'password.reset' && Route::currentRouteName() != 'login.admin' && Route::currentRouteName() != 'register.admin')
 
     @endif --}}
-    @if (Route::currentRouteName() != 'formPendaftaran' &&
-            Route::currentRouteName() != 'Login' &&
-            Route::currentRouteName() != 'Register')
-        @include('pages.partials.navbar')
+    @if (Route::currentRouteName() != 'formPendaftaran')
+        @include('pages.partials.sidebar')
     @endif
     <div class="">
         @yield('content')
