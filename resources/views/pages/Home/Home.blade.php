@@ -20,7 +20,7 @@
 
                 @auth
                     <button class="px-5 py-3 bg-[#E8EEFF] text-black rounded-md hover:bg-black hover:text-white"
-                        onclick="window.location.href='/daftar'">Daftar Sekarang</button>
+                        onclick="window.location.href='{{ route('formPendaftaran') }}?program=Basic'">Daftar Sekarang</button>
                 @else
                     <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
                         class="px-5 py-3 bg-[#E8EEFF] text-black rounded-md hover:bg-black hover:text-white" type="button">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormulirController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,7 @@ Route::post('/email/verification-notification',[VerificationController::class, '
 
 
 // Form Pendaftaran mitra
-Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran')->middleware(['auth', 'verified']);;
+Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran')->middleware(['auth', 'verified']);
+Route::post('/daftar',[FormulirController::class, 'insert'])->middleware(['auth', 'verified']);
 
 
