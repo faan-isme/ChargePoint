@@ -11,14 +11,16 @@ class Formulir extends Model
     use HasFactory;
     protected $table = 'formulir';
     protected $fillable = [
-        'tgl_pengiriman',
         'id_program',
         'id_pelangganPLN',
         'NIK',
         'id_user',
+        'no_telp',
+        'alamat',
         'ktp_img',
-        'tipe_charger ',
-        'charger_img '
+        'tipe_charger',
+        'charger_img',
+        'tgl_pengiriman',
     ];
     protected $casts =[
         'tgl_pengiriman'=> 'datetime'

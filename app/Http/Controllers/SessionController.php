@@ -50,7 +50,7 @@ class SessionController extends Controller
 
         if ($admin && Hash::check($request->password, $admin->password) && $admin->role =='admin') {
             Auth::login($admin);
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('DataPendaftaran');
         }
 
         // Cek login sebagai User
@@ -75,7 +75,7 @@ class SessionController extends Controller
                 'email'=>'required|email|unique:users',
                 // 'no_telp'=>'required|numeric|max:15',
                 // 'alamat'=>'required|max:255',
-                'password'=>'required|min:8|confirmed'
+                'password'=>'required|min_digits:8|confirmed'
             ],[
                 'username.required'=>'Nama wajib diisi',
                 'email.required'=>'Email wajib diisi',
@@ -87,7 +87,7 @@ class SessionController extends Controller
                 // 'alamat.required'=>'Alamat wajib diisi',
                 // 'alamat.max'=>'Alamat maximal 255 karakter',
                 'password.required'=>'Password wajib diisi',
-                'password.min'=>'Minimum password 8 karakter',
+                'password.min_digits'=>'Minimum password 8 karakter',
                 'password.confirmed'=>'Password Konfirmasi Tidak cocok'
 
             ]
@@ -97,10 +97,6 @@ class SessionController extends Controller
         $data = [
                 'username'=>$request->username,
                 'email'=>$request->email,
-                'alamat'=>'unset',
-                'status'=>0,
-                'role'=>'user',
-                'no_telp'=>'unset',
                 'password'=>Hash::make($request->password)
         ];
         $user = User::create($data);

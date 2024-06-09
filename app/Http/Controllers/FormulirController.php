@@ -101,6 +101,9 @@ class FormulirController extends Controller
                 'id_user' => Auth::id(),
                 'id_program' => $program->id,
                 'NIK' => $request->NIK,
+                'no_telp'=> $request->no_tlp,
+                'alamat'=> $request->alamat,
+                'tgl_pengiriman' => now()
             ];
             if ($jenisMitra === 'Basic') {
                 $data['id_pelangganPLN'] = $request->id_pelangganPLN;
