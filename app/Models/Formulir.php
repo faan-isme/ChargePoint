@@ -27,6 +27,10 @@ class Formulir extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function programMitra()
+    {
+        return $this->belongsTo(ProgramMitra::class);
+    }
     public function hasil(): HasOne
     {
         return $this->hasOne(Hasil::class);
