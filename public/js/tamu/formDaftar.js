@@ -10,11 +10,22 @@ $(document).ready(function () {
 
   function toggleElemnts() {
     let imgecharger_imput = `
-        <label class="block mb-2 text-sm font-bold font-poppins text-gray-900 dark:text-white"
-                        for="file_input">Image Charger</label>
+       <label class="block mb-2 text-sm font-bold font-poppins text-gray-900 dark:text-white"
+                        for="img-charger">Image Charger</label>
         <input
             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            id="file_input" type="file" name="charger_img">
+             id="img-charger" type="file" name="charger_img" accept="image/*">
+        <div class="mb-4 mt-4">
+            <img id="preview-charger" alt="Preview Gambar" class="w-[50%] h-[50%] hidden cursor-pointer">
+        </div>
+        <div class="fixed p-5 md:p-o inset-0 hidden items-center justify-center bg-black bg-opacity-50"
+            id="modal-charger">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm mx-auto my-auto">
+                <div class="p-2">
+                    <img id="check-charger" src="#" class="img-fluid w-full" alt="Modal Image">
+                </div>
+            </div>
+        </div>
     `;
     let tipecharger_input = `
         <label for="tipecharger"
@@ -58,76 +69,38 @@ $(document).ready(function () {
   };
   // Set the select value based on Form
   $('#jeniskemitraan').change(toggleElemnts);
+
+
+  function setupImagePreview(inputSelector, previewSelector, modalSelector, modalImgSelector) {
+    $(inputSelector).on('change', function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const preview = $(previewSelector);
+        preview.attr('src', URL.createObjectURL(file));
+        preview.show();
+      }
+    });
+
+    $(previewSelector).on('click', function () {
+      const previewSrc = $(this).attr('src');
+      $(modalImgSelector).attr('src', previewSrc);
+      $(modalSelector).removeClass('hidden').addClass('flex');
+    });
+
+    $(modalSelector).on('click', function (e) {
+      if (!$(e.target).closest('.max-w-sm').length) {
+        $(this).addClass('hidden').removeClass('flex');
+      }
+    });
+  };
+
+  setupImagePreview('#img-Ktp', '#preview', '#imageModal', '#modalcheck');
+  setupImagePreview('#img-charger', '#preview-charger', '#modal-charger', '#check-charger');
+  
 });
 
-// // Card Paket
-// const subscriptionType = localStorage.getItem("subscriptionType");
-// if (subscriptionType) {
-//     const idPln = document.getElementById("pln");
-//     const tipeCharger = document.getElementById("tipecharger");
-//     const textForm = document.getElementById("text-daftar");
-//     console.log(textForm);
-//     if (subscriptionType === "standar") {
-//         idPln.style.display = "none";
-//         tipeCharger.style.display = "none";
-//         textForm.style.display = "none";
-//     } else if (subscriptionType === "premium") {
-//         tipeCharger.style.display = "none";
-//         idPln.style.display = "none";
-//         textForm.style.display = "none";
-//     }
-//     localStorage.removeItem("subscriptionType");
-// }
 
-// // Modal Image KTP
-// const imgKtp = document.getElementById("img-Ktp");
-// const imageModal = document.getElementById("imageModal");
-// const modalCheck = document.getElementById("modalcheck");
-// const preview = document.getElementById("preview");
 
-// imgKtp.addEventListener("change", (event) => {
-//     const [file] = event.target.files;
-//     if (file) {
-//         preview.src = URL.createObjectURL(file);
-//         preview.style.display = "block";
-//     }
-// });
 
-// preview.addEventListener("click", function () {
-//     modalCheck.src = preview.src;
-//     imageModal.classList.remove("hidden");
-//     imageModal.classList.add("flex");
-//     imageModal.classList.remove("hidden");
-// });
-// imageModal.addEventListener("click", function (e) {
-//     if (!e.target.closest(".max-w-sm")) {
-//         imageModal.classList.add("hidden");
-//     }
-// });
 
-// // Modal Image Charger
-// const imgCharger = document.getElementById("img-charger");
-// const modalCharger = document.getElementById("modal-charger");
-// const checkCharger = document.getElementById("check-charger");
-// const previewCharger = document.getElementById("preview-charger");
-
-// imgCharger.addEventListener("change", (event) => {
-//     const [file] = event.target.files;
-//     if (file) {
-//         previewCharger.src = URL.createObjectURL(file);
-//         previewCharger.style.display = "block";
-//     }
-// });
-
-// previewCharger.addEventListener("click", function () {
-//     checkCharger.src = previewCharger.src;
-//     modalCharger.classList.remove("hidden");
-//     modalCharger.classList.add("flex");
-//     modalCharger.classList.remove("hidden");
-// });
-// modalCharger.addEventListener("click", function (e) {
-//     if (!e.target.closest(".max-w-sm")) {
-//         modalCharger.classList.add("hidden");
-//     }
-// });
 
