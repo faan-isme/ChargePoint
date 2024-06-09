@@ -39,8 +39,8 @@ Route::post('/email/verification-notification',[VerificationController::class, '
 
 
 // Form Pendaftaran mitra
-Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran')->middleware(['auth', 'verified']);
-Route::post('/daftar',[FormulirController::class, 'insert'])->middleware(['auth', 'verified']);
+Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran')->middleware(['auth', 'verified','check.formulir.acces']);
+Route::post('/daftar',[FormulirController::class, 'insert'])->middleware(['auth', 'verified','check.formulir.acces']);
 
 
 // Dashboard

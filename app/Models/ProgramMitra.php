@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class ProgramMitra extends Model
 {
     use HasFactory;
-    protected $table = 'ProgramMitra';
+    protected $table = 'program_mitra';
     protected $fillable = [
         'nama_program',
         'harga',
