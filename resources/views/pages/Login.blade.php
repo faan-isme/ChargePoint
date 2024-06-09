@@ -85,7 +85,7 @@
                     </div>
                 </form>
                 <div class="flex text-center justify-center mt-5 gap-2 mb-16">
-                    <p class="font-bold text-[#110DB1]">have an account? </p>
+                    <p class="font-bold text-[#110DB1]">Don’t have an account? </p>
                     <a class="font-bold text-[#77049F]" href="/register">Register</a>
                 </div>
             </div>
