@@ -9,7 +9,7 @@
 @section('content')
 
 <div class="px-6 pt-3 md:px-10 md:pt-10 lg:ml-64">
-    <h1 class="mb-6 md:text-3xl text-2xl font-poppins font-bold">Acc Pendaftaran</h1>
+    <h1 class="mb-6 md:text-3xl text-2xl font-poppins font-bold">Revisi Pendaftaran</h1>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-[14px] font-bold font-poppins text-black uppercase bg-[#E8EEFF]">
@@ -18,16 +18,13 @@
                         No
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Nama User
+                        Nama
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Email User
+                        Email
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Admin
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Tanggal
+                        Action
                     </th>
                 </tr>
             </thead>
@@ -44,15 +41,11 @@
                             {{ $item->email }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $item->admin }}
+                            <a href="{{ route('CheckPendaftaran', $item->id) }}"
+                                class="font-medium px-6 py-2 rounded-md bg-[#000D81] hover:bg-black text-white">Check</a>
                         </td>
-                        <td class="px-6 py-4">
-                            {{ $item->tanggal }}
-                        </td>
-
                     </tr>
                 @endforeach
-                
             </tbody>
         </table>
     </div>

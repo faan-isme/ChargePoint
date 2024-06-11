@@ -11,6 +11,7 @@ class Formulir extends Model
     use HasFactory;
     protected $table = 'formulir';
     protected $fillable = [
+        'nama',
         'id_program',
         'id_pelangganPLN',
         'NIK',
@@ -20,11 +21,14 @@ class Formulir extends Model
         'ktp_img',
         'tipe_charger',
         'charger_img',
+        'status',
         'tgl_pengiriman',
     ];
     protected $casts =[
-        'tgl_pengiriman'=> 'datetime'
+        'tgl_pengiriman'=> 'datetime',
+       
     ];
+    
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -36,5 +40,9 @@ class Formulir extends Model
     public function hasil(): HasOne
     {
         return $this->hasOne(Hasil::class);
+    }
+    public function pesan(): HasOne
+    {
+        return $this->hasOne(Pesan::class);
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\FormulirController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,9 +45,18 @@ Route::post('/daftar',[FormulirController::class, 'insert'])->middleware(['auth'
 
 
 // Dashboard
-Route::view('/admin/datapendaftaran', 'pages.Dashboard.DataPendaftaran')->name('DataPendaftaran');
-Route::view('/admin/checkpendaftaran', 'pages.Dashboard.CheckPendaftaran')->name('CheckPendaftaran');
-Route::view('/admin/notifikasi', 'pages.Dashboard.Notifikasi')->name('Notifikasi');
-Route::view('/admin/accpendaftaran', 'pages.Dashboard.AccPendaftaran')->name('AccPendaftaran');
-Route::view('/admin/prosespendaftaran', 'pages.Dashboard.ProsesPendaftaran')->name('ProsesPendaftaran');
+Route::get('/admin/datapendaftaran', [ViewController::class,'formulir'])->name('DataPendaftaran');
+Route::get('/admin/checkpendaftaran/{id_formulir}', [ViewController::class,'cekFormulir'])->name('CheckPendaftaran');
+Route::get('/admin/checkpendaftaran/acc/{id}', [FormulirController::class, 'acc'])->name('acc');
+Route::post('/admin/checkpendaftaran/acc/{id}', [FormulirController::class, 'revisi'])->name('revisi');
+
+Route::get('/admin/pesan/{id}', [ViewController::class,'pesan'])->name('Pesan');
+Route::get('/admin/accpendaftaran', [ViewController::class,'hasil'])->name('AccPendaftaran');
+Route::get('/admin/revisipendaftaran', [ViewController::class,'revisi'])->name('RevisiPendaftaran');
+
+// buat route revisi menuju route revisi
+Route::get('/user/revisiformulir/{id}', [ViewController::class,'revisiFormulir'])->name('RevisiFormulir');
+// buat route revisi menuju controller FormulirController update 
+Route::put('/user/revisiformulir/{id}', [FormulirController::class,'update'])->name('UpdateFormulir');
+// pasang middelware jika ststus formulir tidak sama dengan revisi maka dilarang
 

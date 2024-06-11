@@ -22,4 +22,9 @@ class Admin extends Model implements AuthenticatableContract
     {
         return $this->hasMany(Hasil::class);
     }
+    public function pesan()
+    {
+        return $this->hasMany(Pesan::class);
+    }
 }
+

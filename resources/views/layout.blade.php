@@ -21,7 +21,8 @@
     @endif --}}
     @if (Route::currentRouteName() != 'formPendaftaran' &&
             Route::currentRouteName() != 'Login' &&
-            Route::currentRouteName() != 'Register')
+            Route::currentRouteName() != 'Register'&&
+            Route::currentRouteName() != 'RevisiFormulir')
         @include('pages.partials.navbar')
     @endif
     <div class="">

@@ -30,10 +30,10 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/prosespendaftaran"
+                <a href="{{route('RevisiPendaftaran')}}"
                     class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                    <span class="flex-1 ms-3 whitespace-nowrap">Proses Pendaftaran</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Revisi Pendaftaran</span>
 
                 </a>
             </li>

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('formulir', function (Blueprint $table) {
             $table->id();
+            $table->string('nama',40);
             $table->unsignedBigInteger('id_program');
             $table->string('id_pelangganPLN',30)->default('null');
             $table->string('NIK',16);

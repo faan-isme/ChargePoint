@@ -22,7 +22,7 @@ class CheckFormulirAcces
         // Lakukan pengecekan pada tabel formulir
         if (Formulir::where('id_user', $userId)->exists()) {
             // Jika ada, kita tolak akses
-            return redirect()->back()->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+            return redirect()->back()->withErrors(['error' => 'Anda Sudah Mengisi Formulir']);;
         }
 
         // Jika tidak, lanjutkan ke permintaan berikutnya
