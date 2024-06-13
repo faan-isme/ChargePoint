@@ -3,6 +3,7 @@
 use App\Http\Controllers\FormulirController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// route ini digunakan untuk membuat shortcut folder storage jika cPanel tidak bisa akses terminal
+// Route::get('/storage-link', function(){
+//     $target = storage_path('app/public');
+//     $link = $_SERVER['DOCUMENT_ROOT'].'/storage';
+//     symlink($target,$link);
+//     echo 'ok';
+// });
 
 // Home 
 Route::view('/', 'pages.Home.Home')->name('home');
@@ -34,19 +42,24 @@ Route::get('/email/verify/{id}/{hash}',[VerificationController::class, 'verify']
 Route::post('/email/verification-notification',[VerificationController::class, 'resendVerif'])->middleware(['auth', 'throttle:1,1'])->name('verification.send');
 
 
-
-
-
-
 // Form Pendaftaran mitra
-Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran')->middleware(['auth', 'verified']);
-Route::post('/daftar',[FormulirController::class, 'insert'])->middleware(['auth', 'verified']);
+Route::view('/daftar', 'pages.Home.formPendaftaran')->name('formPendaftaran')->middleware(['auth', 'verified','check.formulir.acces']);
+Route::post('/daftar',[FormulirController::class, 'insert'])->middleware(['auth', 'verified','check.formulir.acces']);
 
 
 // Dashboard
-Route::view('/admin/datapendaftaran', 'pages.Dashboard.DataPendaftaran')->name('DataPendaftaran');
-Route::view('/admin/checkpendaftaran', 'pages.Dashboard.CheckPendaftaran')->name('CheckPendaftaran');
-Route::view('/admin/notifikasi', 'pages.Dashboard.Notifikasi')->name('Notifikasi');
-Route::view('/admin/accpendaftaran', 'pages.Dashboard.AccPendaftaran')->name('AccPendaftaran');
-Route::view('/admin/prosespendaftaran', 'pages.Dashboard.ProsesPendaftaran')->name('ProsesPendaftaran');
+Route::get('/admin/datapendaftaran', [ViewController::class,'formulir'])->name('DataPendaftaran')->middleware('admin.akses');
+Route::get('/admin/checkpendaftaran/{id_formulir}', [ViewController::class,'cekFormulir'])->name('CheckPendaftaran')->middleware('admin.akses');
+Route::get('/admin/checkpendaftaran/acc/{id}', [FormulirController::class, 'acc'])->name('acc')->middleware('admin.akses');
+Route::post('/admin/checkpendaftaran/acc/{id}', [FormulirController::class, 'revisi'])->name('revisi')->middleware('admin.akses');
+
+Route::get('/admin/pesan/{id}', [ViewController::class,'pesan'])->name('Pesan')->middleware('admin.akses');
+Route::get('/admin/accpendaftaran', [ViewController::class,'hasil'])->name('AccPendaftaran')->middleware('admin.akses');
+Route::get('/admin/revisipendaftaran', [ViewController::class,'revisi'])->name('RevisiPendaftaran')->middleware('admin.akses');
+
+// buat route revisi menuju route revisi
+Route::get('/user/revisiformulir/{id}', [ViewController::class,'revisiFormulir'])->name('RevisiFormulir')->middleware(['auth', 'verified']);
+// buat route revisi menuju controller FormulirController update 
+Route::put('/user/revisiformulir/{id}', [FormulirController::class,'update'])->name('UpdateFormulir')->middleware(['auth', 'verified']);
+
 
