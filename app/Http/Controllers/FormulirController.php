@@ -103,7 +103,7 @@ class FormulirController extends Controller
             $program = ProgramMitra::where('nama_program', $jenisMitra)->first();
 
             $data = [
-                'nama' => $program->nama,
+                'nama' => $request->nama,
                 'id_user' => Auth::id(),
                 'id_program' => $program->id,
                 'NIK' => $request->NIK,
@@ -167,9 +167,9 @@ class FormulirController extends Controller
                         'no_tlp' => 'required|numeric|max_digits:14',
                         'id_pelangganPLN' => 'required|numeric|max_digits:11',
                         'NIK' => 'required|numeric|max_digits:16',
-                        'ktp_img' => '|image|mimes:jpeg,png,jpg|max:2048',
+                        'ktp_img' => 'image|mimes:jpeg,png,jpg|max:2048',
                         'tipe_charger' => 'required',
-                        'charger_img' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                        'charger_img' => 'image|mimes:jpeg,png,jpg|max:2048',
     
                     ],
                     [
@@ -188,7 +188,6 @@ class FormulirController extends Controller
                         'ktp_img.mimes' => 'Gambar KTP harus memiliki format: jpeg, png, jpg',
                         'ktp_img.max' => 'Ukuran gambar KTP maksimal adalah 2MB',
                         'tipe_charger.required' => 'Tipe charger wajib diisi',
-                        'charger_img.required' => 'Gambar charger wajib diunggah',
                         'charger_img.image' => 'File charger harus berupa gambar',
                         'charger_img.mimes' => 'Gambar charger harus memiliki format: jpeg, png, jpg',
                         'charger_img.max' => 'Ukuran gambar charger maksimal adalah 2MB',
