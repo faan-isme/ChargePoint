@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="md:ms-20 md:me-20 lg:ms-20 ms-10 me-10 lg:me-0 h-screen">
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <div class="fixed z-50">
             @foreach ($errors->all() as $index => $error)
                 <div id="alert-{{ $index + 1 }}"
@@ -34,7 +34,8 @@
                 </div>
             @endforeach
         </div>
-    @endif
+    @endif --}}
+    @include('pages.partials.alerterror')
     <div class="lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:justify-center" id="grid">
         <div class="flex flex-col">
             <div class="text-center mt-32">

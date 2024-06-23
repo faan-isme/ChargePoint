@@ -1,6 +1,6 @@
 <nav class="bg-[#000D81] shadow-md shadow-black fixed w-full z-50 ">
     <div class="max-w-screen-lg flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="{{route('home')}}" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">ChargePoint</span>
         </a>
         <button data-collapse-toggle="navbar-default" type="button"
@@ -35,29 +35,37 @@
                         // Mendapatkan ID pengguna yang sedang login
                         $userId = Auth::id();
                         // Mengecek apakah pengguna sudah mengisi formulir
-                        $hasFilledForm = \App\Models\Formulir::where('id_user', $userId)
-                            ->where('status', 'revisi')
-                            ->first();
+                        $hasFilledForm = \App\Models\Formulir::where('id_user', $userId)->first();
                         if ($hasFilledForm) {
                             $formulirId = $hasFilledForm->id;
                             $encryptedId = Crypt::encryptString($formulirId);
+                            $status = $hasFilledForm->status;
                         }
+
+                        
+
                     @endphp
                     @if ($hasFilledForm)
-                        <li>
-                            <a href="{{ route('RevisiFormulir', $encryptedId) }}"
-                                class="block py-2 px-3 text-black md:text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent">
+                        @if ($status == 'revisi')
+                            <li>
+                                <a href="{{ route('RevisiFormulir', $encryptedId) }}"
+                                    class="block py-2 px-3 text-black md:text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent">
 
-                                <button type="button"
-                                    class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    
-                                    <div
-                                        class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                                        1</div>Revisi
-                                </button>
-                            </a>
+                                    <button type="button"
+                                        class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 
-                        </li>
+                                        <div
+                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                                            1</div>Revisi
+                                    </button>
+                                </a>
+                            </li>
+                        @else
+                            <li>
+                                <a href="{{ route('status', $status) }}"
+                                    class="block py-2 px-3 text-black md:text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent">Status</a>
+                            </li>
+                        @endif
                     @endif
                 @endauth
                 <div>

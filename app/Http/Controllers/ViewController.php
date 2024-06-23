@@ -87,7 +87,6 @@ class ViewController extends Controller
         }
         $intID = intval($id);
         // $data = Pesan::join('formulir', 'pesan.id_formulir', '=', 'formulir.id')
-
         //     ->join('admin', 'pesan.id_formulir', '=', 'admin.id')
         //     ->where('formulir.id', $intID)
         //     ->where('formulir.status', 'revisi')
@@ -117,5 +116,9 @@ class ViewController extends Controller
             ->where('formulir.status', 'revisi')
             ->first();
         return view('pages.Home.editPendaftaran', compact('data'));
+    }
+    public function status($status)
+    {
+        return view('pages.Home.status', ['status'=>$status]);
     }
 }

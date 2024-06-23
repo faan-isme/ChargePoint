@@ -5,7 +5,7 @@
 
 @section('content')
     <section>
-        @if ($errors->any())
+        {{-- @if ($errors->any())
             <div class="fixed z-50">
                 @foreach ($errors->all() as $index => $error)
                     <div id="alert-{{ $index + 1 }}"
@@ -31,7 +31,8 @@
                     </div>
                 @endforeach
             </div>
-        @endif
+        @endif --}}
+        @include('pages.partials.alerterror')
         <div class="bg-[#000D81]">
             <div class="max-w-screen-lg mx-auto p-4">
                 <div class="flex items-center gap-4">
@@ -57,22 +58,23 @@
             <h1 class="text-[#000D81] font-poppins font-semibold">Pesan Admin</h1>
             <br>
             <div class="flex items-start gap-2.5">
-                <img class="w-8 h-8 rounded-full" src="/assets/img/admin.png"  alt="Admin">
+                <img class="w-8 h-8 rounded-full" src="/assets/img/admin.png" alt="Admin">
                 <div class="flex flex-col gap-1 w-full max-w-[320px]">
                     <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                        <span class="text-sm font-semibold text-gray-900 dark:text-white">{{$data->username}}</span>
-                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{$data->tgl_pengiriman}}</span>
+                        <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $data->username }}</span>
+                        <span
+                            class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ $data->pesan_updated_at }}</span>
                     </div>
                     <div
                         class="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                        <p class="text-sm font-normal text-gray-900 dark:text-white"> {{$data->pesan}}</p>
+                        <p class="text-sm font-normal text-gray-900 dark:text-white"> {{ $data->pesan }}</p>
                     </div>
                 </div>
             </div>
             <br>
             <hr>
         </div>
-        
+
         <div class="max-w-screen-lg mx-auto p-4 mt-14">
             <h1 class="text-[#000D81] font-poppins font-semibold">Update Formulir</h1>
         </div>
@@ -111,6 +113,41 @@
                                 class="border-0 border-b-2 text-gray-900 text-sm w-full p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required />
                         </div>
+                        <div class="mb-5" id="tipecharger-input">
+                            <label for="tipecharger"
+                                class="block mb-2 text-sm text-gray-900 dark:text-white font-bold font-poppins">Tipe
+                                Charger
+                            </label>
+                            <input type="text" id="tipecharger" name="tipe_charger" value="{{ $data->tipe_charger }}"
+                                class="border-0 border-b-2 text-gray-900 text-sm w-full p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required />
+                        </div>
+
+                        <div class="mb-5" id="imagecharger-input">
+                            <label class="block mb-2 text-sm font-bold font-poppins text-gray-900 dark:text-white"
+                                for="img-charger">Image Charger</label>
+                            <input
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                id="img-charger" type="file" name="charger_img" accept="image/*">
+                            <div class="mb-4 mt-4">
+                                @if ($data->charger_img)
+                                    <img id="preview-charger" src="{{ asset('storage/' . $data->charger_img) }}"
+                                        alt="Preview Gambar" class="w-[50%] h-[50%] cursor-pointer">
+                                @else
+                                    <img id="preview-charger" alt="Preview Gambar"
+                                        class="w-[50%] h-[50%] hidden cursor-pointer">
+                                @endif
+                            </div>
+                            <div class="fixed p-5 md:p-o inset-0 hidden items-center justify-center bg-black bg-opacity-50"
+                                id="modal-charger">
+                                <div class="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm mx-auto my-auto">
+                                    <div class="p-2">
+                                        <img id="check-charger" src="#" class="img-fluid w-full"
+                                            alt="Modal Image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endif
 
                 </div>
@@ -127,7 +164,8 @@
                             for="img-Ktp">Image KTP</label>
                         <input
                             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                            id="img-Ktp" type="file" name="ktp_img" accept="image/*" value="{{ $data->ktp_img }}">
+                            id="img-Ktp" type="file" name="ktp_img" accept="image/*"
+                            value="{{ $data->ktp_img }}">
 
 
                         <div class="mb-4 mt-4">
@@ -156,7 +194,7 @@
                             class="border-0 border-b-2 text-gray-900 text-sm w-full p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             required>{{ $data->alamat }}</textarea>
                     </div>
-                    @if ($data->id_program === 1)
+                    {{-- @if ($data->id_program === 1)
                         <div class="mb-5" id="tipecharger-input">
                             <label for="tipecharger"
                                 class="block mb-2 text-sm text-gray-900 dark:text-white font-bold font-poppins">Tipe
@@ -193,13 +231,12 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
-            <div class="mt-8 flex gap-5">
+            <div class="mt-8 flex justify-end gap-5">
                 <button class="bg-[#000D81] px-5 py-3 text-white rounded-md hover:bg-black" type="submit">Submit</button>
-                <button class="bg-[#E8EEFF] px-5 py-3 text-black rounded-md hover:bg-black hover:text-white"
-                    type="reset">Reset</button>
+                <a href="{{route('home')}}"><button class="bg-[#E8EEFF] px-5 py-3 text-black rounded-md hover:bg-black hover:text-white" type="button">Kembali</button></a>
             </div>
 
         </form>
