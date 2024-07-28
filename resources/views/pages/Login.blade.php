@@ -44,7 +44,7 @@
             </div>
             <div>
                 <div class="md:mt-14 mt-10 text-center">
-                    <button onclick=""
+                    <button onclick="window.location.href='/auth/redirect/google'"
                         class="flex items-center justify-center p-3 border border-gray-400 rounded-lg shadow-md w-[100%] gap-10 font-bold">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30"
                             viewBox="0 0 48 48">
