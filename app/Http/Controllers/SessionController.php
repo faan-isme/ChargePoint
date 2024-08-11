@@ -55,7 +55,7 @@ class SessionController extends Controller
 
         // Cek login sebagai User
         $user = User::where('email', $request->email)->first();
-        if ($user && Hash::check($request->password, $user->password) && $user->role =='user') {
+        if ($user && $user->password !=null && Hash::check($request->password, $user->password) && $user->role =='user') {
             Auth::login($user);
             return redirect()->route('home');
         }
