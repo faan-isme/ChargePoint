@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\FormulirController;
+use App\Http\Controllers\OauthGoogleController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +38,7 @@ Route::post('/register',[SessionController::class, 'register']);
 //logout
 Route::get('/logout',[SessionController::class, 'logout']);
 
-// enail verivy
+// email verivy
 Route::get('/email/verify', [VerificationController::class,'notice'])->name('verification.notice')->middleware('auth');
 Route::get('/email/verify/{id}/{hash}',[VerificationController::class, 'verify'])->name('verification.verify')->middleware(['auth', 'signed']);
 Route::post('/email/verification-notification',[VerificationController::class, 'resendVerif'])->middleware(['auth', 'throttle:1,1'])->name('verification.send');
@@ -63,3 +65,12 @@ Route::get('/user/revisiformulir/{id}', [ViewController::class,'revisiFormulir']
 Route::put('/user/revisiformulir/{id}', [FormulirController::class,'update'])->name('UpdateFormulir')->middleware(['auth', 'verified']);
 
 
+Route::get('/status',[ViewController::class,'status'])->name('status');
+
+
+ 
+Route::get('/auth/redirect/google',[OauthGoogleController::class, 'redirect']);
+ 
+Route::get('/auth/callback/google',[OauthGoogleController::class, 'callback']);
+
+Route::get('/profile',[ViewController::class,'profile'])->name('profile')->middleware(['auth', 'verified']);

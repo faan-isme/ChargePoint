@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Formulir;
 use App\Models\Hasil;
+use App\Models\Order;
 use App\Models\Pesan;
 use App\Models\ProgramMitra;
 use Exception;
@@ -288,6 +289,12 @@ class FormulirController extends Controller
             'id_admin'=>Auth::id()
         ];
         Hasil::create($data);
+        $order=[
+            'id_formulir' => $intID,
+            'qty' => 1,
+            'status' => 'Unpaid'
+        ];
+        Order::create($order);
         return redirect()->route('AccPendaftaran');
     }
     

@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Formulir;
 use App\Models\Hasil;
+use App\Models\Order;
 use App\Models\Pesan;
 use App\Models\ProgramMitra;
+use App\Models\User;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ViewController extends Controller
 {
@@ -56,7 +59,7 @@ class ViewController extends Controller
         $data = Formulir::join('users', 'formulir.id_user', '=', 'users.id')
             ->select('formulir.id', 'users.username', 'users.email')
             ->where('formulir.status', 'revisi')
-            ->paginate(5);;
+            ->paginate(5);
         return view('pages.Dashboard.RevisiPendaftaran', compact('data'));
     }
     public function pesan($id)
@@ -87,7 +90,6 @@ class ViewController extends Controller
         }
         $intID = intval($id);
         // $data = Pesan::join('formulir', 'pesan.id_formulir', '=', 'formulir.id')
-
         //     ->join('admin', 'pesan.id_formulir', '=', 'admin.id')
         //     ->where('formulir.id', $intID)
         //     ->where('formulir.status', 'revisi')
@@ -117,5 +119,58 @@ class ViewController extends Controller
             ->where('formulir.status', 'revisi')
             ->first();
         return view('pages.Home.editPendaftaran', compact('data'));
+    }
+    public function status()
+    {
+        $userId = Auth::id();
+        $status = Formulir::where('id_user', $userId)->select('status')->first();
+        if ($status->status == 'acc') {
+            $data = Order::join('formulir', 'orders.id_formulir', '=', 'formulir.id')
+                ->join('program_mitra', 'formulir.id_program', '=', 'program_mitra.id')
+                ->select(
+                    'program_mitra.harga',
+                    'program_mitra.deskripsi',
+                    'program_mitra.nama_program',
+                    'orders.qty',
+                    'orders.id',
+                    'formulir.nama',
+                    'formulir.no_telp',
+                )->where('formulir.id_user', $userId)->get();
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = config('midtrans.server_key');
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = config('midtrans.is_production');
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = true;
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = true;
+
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $data->first()->id,
+                    'gross_amount' => $data->first()->harga,
+                ),
+                'customer_details' => array(
+                    'first_name' => $data->first()->nama,
+                    'last_name' => '',
+                    'phone' => $data->first()->no_telp,
+                ),
+            );
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            return view('pages.Home.status', compact('status', 'data','snapToken'));
+        } else {
+            
+            return view('pages.Home.status', compact('status'));
+        }
+    }
+
+    public function profile()
+    {
+        $id = Auth::id();
+        $data = User::select('username', 'email')->where('id', $id)->first();
+        $formulir = Formulir::select('status', 'tgl_pengiriman', 'updated_at', 'id')->where('id_user', $id)->first();
+        $order = Order::select('status', 'created_at', 'updated_at')->where('id_formulir', $formulir->id)->first();
+        return view('pages.profile', compact('data', 'formulir', 'order'));
     }
 }

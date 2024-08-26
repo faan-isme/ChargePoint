@@ -8,33 +8,7 @@
 
 @section('content')
 <section>
-    @if ($errors->any())
-        <div class="fixed z-10">
-            @foreach ($errors->all() as $index => $error)
-                <div id="alert-{{ $index + 1 }}"
-                    class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 z-50"
-                    role="alert">
-                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                    </svg>
-                    <span class="sr-only">Info</span>
-                    <div class="ms-3 text-sm font-medium"> {{ $error }}</div>
-                    <button type="button"
-                        class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
-                        data-dismiss-target="#alert-{{ $index + 1 }}" aria-label="Close">
-                        <span class="sr-only">Close</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                    </button>
-                </div>
-            @endforeach
-        </div>
-    @endif
+    @include('pages.partials.alerterror')
     <div class="bg-[#000D81] ">
         <div class="max-w-screen-lg mx-auto p-4">
             <div class="flex items-center gap-4">
@@ -102,10 +76,9 @@
                         for="img-Ktp">Image KTP</label>
                     <input
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-
                         id="img-Ktp" type="file" name="ktp_img" accept="image/*">
 
-                  
+
                     <div class="mb-4 mt-4">
                         <img id="preview" alt="Preview Gambar" class="w-[50%] h-[50%] hidden cursor-pointer">
                     </div>
@@ -116,7 +89,7 @@
                                 <img id="modalcheck" src="#" class="img-fluid w-full" alt="Modal Image">
                             </div>
                         </div>
-                    </div> 
+                    </div>
 
                 </div>
                 <div class="mb-5">
@@ -126,7 +99,7 @@
                         class="border-0 border-b-2 text-gray-900 text-sm w-full p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required></textarea>
                 </div>
-                <div class="mb-5" id="tipecharger-input"> 
+                <div class="mb-5" id="tipecharger-input">
                 </div>
 
                 <div class="mb-5" id="imagecharger-input">
@@ -135,7 +108,8 @@
         </div>
         <div class="mt-8 flex gap-5">
             <button class="bg-[#000D81] px-5 py-3 text-white rounded-md hover:bg-black" type="submit">Submit</button>
-            <button class="bg-[#E8EEFF] px-5 py-3 text-black rounded-md hover:bg-black hover:text-white" type="reset">Reset</button>
+            <button class="bg-[#E8EEFF] px-5 py-3 text-black rounded-md hover:bg-black hover:text-white"
+                type="reset">Reset</button>
         </div>
 
     </form>

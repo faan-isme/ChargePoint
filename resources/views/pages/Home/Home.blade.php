@@ -8,35 +8,10 @@
 
 @section('content')
 
+@include('pages.partials.alertinfo')
+@include('pages.partials.alerterror')
 {{-- Section 1 --}}
 <section class="bg-[#000D81]">
-    @if ($errors->any())
-        <div class="fixed z-50">
-            @foreach ($errors->all() as $index => $error)
-                <div id="alert-{{ $index + 1 }}"
-                    class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 z-50"
-                    role="alert">
-                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                    </svg>
-                    <span class="sr-only">Info</span>
-                    <div class="ms-3 text-sm font-medium"> {{ $error }}</div>
-                    <button type="button"
-                        class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
-                        data-dismiss-target="#alert-{{ $index + 1 }}" aria-label="Close">
-                        <span class="sr-only">Close</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                    </button>
-                </div>
-            @endforeach
-        </div>
-    @endif
     <div class="md:grid md:grid-cols-2 items-center gap-10 md:max-w-screen-lg mx-auto p-4">
         <div class="mt-28 mb-20 md:mt-20 text-white">
             <h1 class="font-baloo md:text-4xl lg:text-5xl text-3xl">Pendaftaran Mitra</h1>
@@ -47,7 +22,8 @@
 
                 @auth
                     <button class="px-5 py-3 bg-[#E8EEFF] text-black rounded-md hover:bg-black hover:text-white"
-                        onclick="window.location.href='{{ route('formPendaftaran') }}?program=Basic'">Daftar Sekarang</button>
+                        onclick="window.location.href='{{ route('formPendaftaran') }}?program=Basic'">Daftar
+                        Sekarang</button>
                 @else
                     <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
                         class="px-5 py-3 bg-[#E8EEFF] text-black rounded-md hover:bg-black hover:text-white" type="button">
@@ -106,13 +82,10 @@
             <div>
                 <h1 class="font-poppins font-bold lg:text-4xl md:text-3xl text-2xl">Apa itu CharPoint ?</h1>
                 <p class="mt-5">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac dolor risus. Pellentesque
-                    placerat,
-                    risus et luctus posuere, enim mi mollis nibh, at bibendum nisl libero pretium est. Sed sed ex vel
-                    odio
-                    ullamcorper tincidunt vel quis turpis. Ut nibh felis, pulvinar ac nibh quis, ultrices fringilla
-                    justo.
-                    Etiam semper tristique neque quis vehicula.
+                    Selamat datang di Charge Point, aplikasi inovatif yang dirancang khusus untuk memenuhi kebutuhan
+                    pengisian daya kendaraan listrik Anda. Di era modern ini, di mana kendaraan listrik semakin populer
+                    sebagai solusi transportasi yang ramah lingkungan, kami hadir untuk memastikan Anda selalu memiliki
+                    akses yang mudah dan efisien ke stasiun pengisian daya.
                 </p>
             </div>
         </div>
@@ -227,9 +200,24 @@
                     <p class="font-medium font-poppins">Visi dan misi dari Charge Point ? </p>
                 </div>
                 <div class="p-4 bg-black text-white rounded-md hidden mt-4 jawab-QA">
-                    <p class="font-medium font-poppins">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Vestibulum sit amet sapien id diam finibus malesuada quis eu sem. Quisque tristique tristique
-                        venenatis. </p>
+                    <h1>Visi Kami</h1>
+                    <p class="font-medium font-poppins">
+                        Charge Point didirikan dengan visi untuk mendukung transisi global menuju penggunaan energi
+                        terbarukan dan transportasi yang berkelanjutan. Kami percaya bahwa masa depan yang bersih dan
+                        hijau dimulai dari sekarang, dan kami berkomitmen untuk memberikan layanan terbaik untuk
+                        pengguna kendaraan listrik di seluruh dunia.
+
+                        Misi Kami
+                        Misi kami adalah menyediakan jaringan stasiun pengisian daya yang luas dan mudah diakses, serta
+                        pengalaman pengguna yang terbaik melalui teknologi canggih. Dengan Charge Point, Anda dapat
+                        dengan mudah menemukan stasiun pengisian terdekat, memeriksa ketersediaannya, dan bahkan memesan
+                        slot pengisian daya secara langsung dari aplikasi kami.</p><br>
+                        <h1>Misi Kami</h1>
+                        <p class="font-medium font-poppins">
+                            Misi kami adalah menyediakan jaringan stasiun pengisian daya yang luas dan mudah diakses, serta
+                            pengalaman pengguna yang terbaik melalui teknologi canggih. Dengan Charge Point, Anda dapat
+                            dengan mudah menemukan stasiun pengisian terdekat, memeriksa ketersediaannya, dan bahkan memesan
+                            slot pengisian daya secara langsung dari aplikasi kami.</p>
                 </div>
             </div>
 

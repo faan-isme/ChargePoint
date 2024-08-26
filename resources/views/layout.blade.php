@@ -15,14 +15,15 @@
 
 </head>
 
-<body>
+<body >
     {{-- @if (Route::currentRouteName() != 'password.request' && Route::currentRouteName() != 'admin-dashboard' && Route::currentRouteName() != 'password.reset' && Route::currentRouteName() != 'login.admin' && Route::currentRouteName() != 'register.admin')
 
     @endif --}}
     @if (Route::currentRouteName() != 'formPendaftaran' &&
             Route::currentRouteName() != 'Login' &&
             Route::currentRouteName() != 'Register'&&
-            Route::currentRouteName() != 'RevisiFormulir')
+            Route::currentRouteName() != 'RevisiFormulir'&&
+            Route::currentRouteName() != 'status')
         @include('pages.partials.navbar')
     @endif
     <div class="">
