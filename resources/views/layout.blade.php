@@ -15,7 +15,7 @@
 
 </head>
 
-<body>
+<body >
     {{-- @if (Route::currentRouteName() != 'password.request' && Route::currentRouteName() != 'admin-dashboard' && Route::currentRouteName() != 'password.reset' && Route::currentRouteName() != 'login.admin' && Route::currentRouteName() != 'register.admin')
 
     @endif --}}

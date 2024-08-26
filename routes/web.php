@@ -65,10 +65,12 @@ Route::get('/user/revisiformulir/{id}', [ViewController::class,'revisiFormulir']
 Route::put('/user/revisiformulir/{id}', [FormulirController::class,'update'])->name('UpdateFormulir')->middleware(['auth', 'verified']);
 
 
-Route::get('/status/{status}',[ViewController::class,'status'])->name('status');
+Route::get('/status',[ViewController::class,'status'])->name('status');
 
 
  
 Route::get('/auth/redirect/google',[OauthGoogleController::class, 'redirect']);
  
 Route::get('/auth/callback/google',[OauthGoogleController::class, 'callback']);
+
+Route::get('/profile',[ViewController::class,'profile'])->name('profile')->middleware(['auth', 'verified']);

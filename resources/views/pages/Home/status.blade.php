@@ -29,7 +29,7 @@
         </div>
         <div
             class="max-w-screen-lg mx-auto p-4 h-[500px] md:mt-20 sm:mt-15 flex items-center p-4 text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
-            @if ($status == 'acc')
+            @if ($status->status == 'acc')
                 <div
                     class="w-full flex flex-col items-center p-4 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-green-400 ">
 
@@ -39,10 +39,16 @@
                         </path>
                     </svg>
 
-                    <h1 class="text-[#299963] font-poppins font-bold">Pendaftaran telah di setujui</h1>
-                    <h2 class="text-[#299963] font-poppins font-bold">Silahkan cek email anda untuk mendapatkan akses ke Akun Mitra</h2>
+                    <h1 class="text-[#299963] font-poppins font-bold">Pendaftaran telah disetujui</h1>
+                    <h2 class="text-[#299963] font-poppins font-bold">Silahkan melakuakn pembayaran untuk memproses
+                        pemasangan alat dan aktivasi akun</h2>
+                    <div class="mt-4 flex justify-center">
+                        <div class="text-right">
+                            <button id="pay-button" class="bg-blue-500 text-white px-6 py-2 rounded mt-4">Checkout</button>
+                        </div>
+                    </div>
                 </div>
-            @elseif($status == 'new')
+            @elseif($status->status == 'new')
                 <div
                     class="w-full flex flex-col items-center p-4 rounded-lg bg-blue-100 dark:bg-gray-800 dark:text-green-400 ">
 
@@ -54,11 +60,46 @@
 
                     <h1 class="text-[#1C64F2] font-poppins font-bold">Formulir Dalam Proses Verifikasi</h1>
                 </div>
-            @else
-                <h2>haiw</h2>
+            
             @endif
 
         </div>
 
     </section>
+@endsection
+
+@section('script')
+    @if (($status->status??null) == 'acc')
+        <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="{{ config('midtrans.client_key') }}"></script>
+        <script type="text/javascript">
+            // For example trigger on button clicked, or any time you need
+            var payButton = document.getElementById('pay-button');
+            payButton.addEventListener('click', function() {
+                // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+                window.snap.pay('{{ $snapToken }}', {
+                    onSuccess: function(result) {
+                        /* You may add your own implementation here */
+                        alert("payment success!");
+                        console.log(result);
+                    },
+                    onPending: function(result) {
+                        /* You may add your own implementation here */
+                        alert("wating your payment!");
+                        console.log(result);
+                    },
+                    onError: function(result) {
+                        /* You may add your own implementation here */
+                        alert("payment failed!");
+                        console.log(result);
+                    },
+                    onClose: function() {
+                        /* You may add your own implementation here */
+                        alert('you closed the popup without finishing the payment');
+                    }
+                })
+            });
+        </script>
+    @endif
+
 @endsection
