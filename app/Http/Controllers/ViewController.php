@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Midtrans\Transaction;
 
 class ViewController extends Controller
 {
@@ -124,6 +125,7 @@ class ViewController extends Controller
     {
         $userId = Auth::id();
         $status = Formulir::where('id_user', $userId)->select('status')->first();
+
         if ($status->status == 'acc') {
             $data = Order::join('formulir', 'orders.id_formulir', '=', 'formulir.id')
                 ->join('program_mitra', 'formulir.id_program', '=', 'program_mitra.id')
@@ -133,9 +135,12 @@ class ViewController extends Controller
                     'program_mitra.nama_program',
                     'orders.qty',
                     'orders.id',
+                    'orders.status',
                     'formulir.nama',
                     'formulir.no_telp',
-                )->where('formulir.id_user', $userId)->get();
+                    'formulir.id_program'
+                )->where('formulir.id_user', $userId)->first();
+
             // Set your Merchant Server Key
             \Midtrans\Config::$serverKey = config('midtrans.server_key');
             // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
@@ -144,23 +149,57 @@ class ViewController extends Controller
             \Midtrans\Config::$isSanitized = true;
             // Set 3DS transaction for credit card to true
             \Midtrans\Config::$is3ds = true;
+            try {
+                $transaction = Transaction::status($data->id);
+                $transaction = $transaction->transaction_status;
+            } catch (\Exception) {
+                $transaction = null;
+            }
 
-            $params = array(
-                'transaction_details' => array(
-                    'order_id' => $data->first()->id,
-                    'gross_amount' => $data->first()->harga,
-                ),
-                'customer_details' => array(
-                    'first_name' => $data->first()->nama,
-                    'last_name' => '',
-                    'phone' => $data->first()->no_telp,
-                ),
-            );
 
-            $snapToken = \Midtrans\Snap::getSnapToken($params);
-            return view('pages.Home.status', compact('status', 'data','snapToken'));
+            if ($transaction == 'settlement') {
+                $dataInvoice = array(
+                    "price" => $data->harga,
+                    "qty" => $data->qty,
+                    "name" => $data->nama_program,
+                    "status" => $data->status,
+                );
+                return view('pages.Home.status', compact('status', 'transaction', 'dataInvoice'));
+            } else {
+
+
+             
+                $uniqueOrderId = 'ORDER-' . time() . '-' . rand(1000, 9999);
+                $transaction_details = array(
+                    'order_id' => $uniqueOrderId,
+                    'gross_amount' => $data->harga, 
+                );
+                
+                $item_details = array(
+                    array(
+                        'id' => $data->id_program,
+                        "price" => $data->harga,
+                        "quantity" => $data->qty,
+                        "name" => $data->nama_program,
+                    ),
+                );
+                
+                $customer_details = array(
+                    'first_name' => $data->nama,
+                    'phone' => $data->no_telp,
+                );
+                // Fill transaction details
+                $transaction = array(
+                    'transaction_details' => $transaction_details,
+                    'customer_details' => $customer_details,
+                    'item_details' => $item_details,
+                );
+                
+                $snapToken = \Midtrans\Snap::getSnapToken($transaction);
+                return view('pages.Home.status', compact('status', 'snapToken'));
+            }
         } else {
-            
+
             return view('pages.Home.status', compact('status'));
         }
     }
@@ -170,7 +209,11 @@ class ViewController extends Controller
         $id = Auth::id();
         $data = User::select('username', 'email')->where('id', $id)->first();
         $formulir = Formulir::select('status', 'tgl_pengiriman', 'updated_at', 'id')->where('id_user', $id)->first();
-        $order = Order::select('status', 'created_at', 'updated_at')->where('id_formulir', $formulir->id)->first();
+        if ($formulir) {
+            $order = Order::select('status', 'created_at', 'updated_at')->where('id_formulir', $formulir->id)->first();
+        } else {
+            $order = null;
+        }
         return view('pages.profile', compact('data', 'formulir', 'order'));
     }
 }

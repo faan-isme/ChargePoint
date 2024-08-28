@@ -29,7 +29,109 @@
         </div>
         <div
             class="max-w-screen-lg mx-auto p-4 h-[500px] md:mt-20 sm:mt-15 flex items-center p-4 text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
-            @if ($status->status == 'acc')
+
+            @if ($status->status == 'acc' && ($transaction ?? null) == 'settlement')
+                <div
+                    class="w-full flex flex-col items-center p-4 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-green-400 ">
+
+                    <svg viewBox="0 0 20 20" height="50" fill="#299963" stroke="">
+                        <path
+                            d="M10 1.875C8.39303 1.875 6.82214 2.35152 5.486 3.24431C4.14985 4.1371 3.10844 5.40605 2.49348 6.8907C1.87852 8.37535 1.71762 10.009 2.03112 11.5851C2.34463 13.1612 3.11846 14.6089 4.25476 15.7452C5.39106 16.8815 6.8388 17.6554 8.4149 17.9689C9.99099 18.2824 11.6247 18.1215 13.1093 17.5065C14.594 16.8916 15.8629 15.8502 16.7557 14.514C17.6485 13.1779 18.125 11.607 18.125 10C18.1225 7.84588 17.2657 5.7807 15.7425 4.25751C14.2193 2.73431 12.1541 1.87749 10 1.875ZM13.8696 8.57727L9.28589 12.9523C9.16935 13.0632 9.01463 13.125 8.85376 13.125C8.69289 13.125 8.53818 13.0632 8.42164 12.9523L6.13037 10.7648C6.01067 10.6501 5.94137 10.4926 5.9377 10.3269C5.93404 10.1612 5.99629 10.0008 6.11081 9.88092C6.22532 9.76107 6.38272 9.69157 6.54844 9.68769C6.71416 9.68381 6.87464 9.74587 6.99463 9.86023L8.85376 11.6357L13.0054 7.67273C13.1254 7.55837 13.2859 7.49631 13.4516 7.50019C13.6173 7.50407 13.7747 7.57357 13.8892 7.69342C14.0037 7.81327 14.066 7.97367 14.0623 8.13939C14.0586 8.30512 13.9893 8.46261 13.8696 8.57727Z">
+                        </path>
+                    </svg>
+
+                    <h1 class="text-[#299963] font-poppins font-bold">Pembayaran Berhasil</h1>
+                    <h2 class="text-[#299963] font-poppins font-bold">Yey! Petugas akan segera mengirimkan Alat dan Ativasi
+                        akunmu</h2>
+                    <div class="mt-4 flex justify-center">
+                        <div class="text-right">
+                            <button id="pay-button" data-modal-target="default-modal" data-modal-toggle="default-modal"
+                                class="bg-blue-500 text-white px-6 py-2 rounded mt-4">Cek
+                                Invoice</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Main modal -->
+                <div id="default-modal" tabindex="-1" aria-hidden="true"
+                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center max-w-screen-lg mx-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-2xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div
+                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    Detail Transaksi
+                                </h3>
+                                <button type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    data-modal-hide="default-modal">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-4 md:p-5 space-y-4">
+
+
+                                <div class="relative overflow-x-auto">
+                                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        <thead
+                                            class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 rounded-s-lg">
+                                                    Program Mitra
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Qty
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 rounded-e-lg">
+                                                    Harga
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="bg-white dark:bg-gray-800">
+                                                <th scope="row"
+                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    {{$dataInvoice['name']}}
+                                                </th>
+                                                <td class="px-6 py-4">
+                                                    {{$dataInvoice['qty']}}
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    {{$dataInvoice['price']}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="font-semibold text-gray-900 dark:text-white">
+                                                <th scope="row" class="px-6 py-3 text-base">Total</th>
+                                                <td class="px-6 py-3"></td>
+                                                <td class="px-6 py-3">{{$dataInvoice['price']}}</td>
+                                            </tr>
+                                            <tr class="font-semibold text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700">
+                                                <th scope="row" class="px-6 py-3 text-base">Status</th>
+                                                <td class="px-6 py-3"></td>
+                                                <td class="px-6 py-3">{{$dataInvoice['status']}}</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            @elseif ($status->status == 'acc')
                 <div
                     class="w-full flex flex-col items-center p-4 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-green-400 ">
 
@@ -60,7 +162,6 @@
 
                     <h1 class="text-[#1C64F2] font-poppins font-bold">Formulir Dalam Proses Verifikasi</h1>
                 </div>
-            
             @endif
 
         </div>
@@ -69,7 +170,7 @@
 @endsection
 
 @section('script')
-    @if (($status->status??null) == 'acc')
+    @if (($status->status ?? null) == 'acc' && !($transaction ?? null) == 'settlement')
         <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
             data-client-key="{{ config('midtrans.client_key') }}"></script>
         <script type="text/javascript">
